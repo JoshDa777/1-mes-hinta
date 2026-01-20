@@ -7,66 +7,58 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --blue-pastel: #b2d8ff;
-            --pink-pastel: #ffc2d1;
-            --accent-blue: #74c0fc;
-            --accent-pink: #ff85a1;
-            --text-color: #4a4a4a;
+            --blue-circle: #a2d2ff; /* Azul pastel más visible */
+            --pink-circle: #ffafcc; /* Rosa pastel más visible */
+            --accent-blue: #0077b6;
+            --accent-pink: #ff0054;
             --beastars-font: 'Cinzel', serif;
         }
 
         body {
             margin: 0;
             padding: 0;
-            background-color: #fdfbfb;
+            background-color: #f0f2f5;
             font-family: 'Quicksand', sans-serif;
-            color: var(--text-color);
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
             overflow-x: hidden;
+            position: relative;
         }
 
-        /* --- Círculos Flotantes (¡Ahora sí aparecen!) --- */
+        /* --- Círculos Flotantes (CORREGIDOS) --- */
         #circles-container {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Detrás de todo */
+            width: 100vw;
+            height: 100vh;
+            z-index: 0; /* Detrás del contenido pero sobre el fondo */
             pointer-events: none;
-            overflow: hidden;
         }
 
         .circle {
             position: absolute;
             bottom: -150px;
             border-radius: 50%;
+            opacity: 0.8; /* ¡Ahora mucho más visibles! */
             animation: moveUp linear infinite;
         }
 
         @keyframes moveUp {
             0% {
                 transform: translateY(0) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.7;
-            }
-            90% {
-                opacity: 0.7;
             }
             100% {
                 transform: translateY(-120vh) rotate(360deg);
-                opacity: 0;
             }
         }
 
-        /* --- Contenido --- */
+        /* --- Contenido Principal --- */
         .container {
-            z-index: 1;
+            position: relative;
+            z-index: 10; /* Asegura que el texto esté por encima de los círculos */
             width: 90%;
             max-width: 750px;
             text-align: center;
@@ -75,12 +67,13 @@
 
         .beastars-title {
             font-family: var(--beastars-font);
-            font-size: clamp(2.5rem, 8vw, 4rem);
-            color: #222;
+            font-size: clamp(2.5rem, 10vw, 4.5rem);
+            color: #1a1a1a;
             text-transform: uppercase;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             margin-bottom: 20px;
-            text-shadow: 3px 3px 0px var(--accent-blue), -2px -2px 0px var(--accent-pink);
+            /* Estilo Beastars con sombras fuertes */
+            text-shadow: 4px 4px 0px var(--blue-circle), -3px -3px 0px var(--pink-circle);
         }
 
         .couple-images {
@@ -91,58 +84,46 @@
         }
 
         .couple-images img {
-            width: 140px;
-            height: 140px;
-            border-radius: 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50% 50% 10% 10%; /* Toque tierno */
             object-fit: cover;
-            border: 5px solid white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .couple-images img:hover {
-            transform: scale(1.15) rotate(3deg);
+            border: 6px solid white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
         }
 
         .music-box {
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
             padding: 25px;
             border-radius: 35px;
             margin-bottom: 30px;
             border: 2px solid white;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.05);
         }
 
         .btn-music {
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-pink));
+            background: linear-gradient(45deg, #00b4d8, #ff85a1);
             color: white;
             border: none;
-            padding: 18px 35px;
+            padding: 15px 35px;
             font-size: 1.1rem;
             border-radius: 50px;
             cursor: pointer;
             font-weight: bold;
-            transition: 0.3s;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .btn-music:hover { 
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
         .letter-content {
-            line-height: 1.9;
+            line-height: 1.8;
             font-size: 1.15rem;
             text-align: left;
             padding: 30px;
-            background: rgba(255, 255, 255, 0.4);
+            background: rgba(255, 255, 255, 0.7); /* Fondo semi-claro para leer bien */
             border-radius: 25px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+            color: #333;
         }
 
-        #music-status { margin-top: 15px; font-size: 0.95rem; color: #666; font-style: italic; }
+        #music-status { margin-top: 15px; font-weight: bold; color: var(--accent-pink); }
     </style>
 </head>
 <body>
@@ -168,12 +149,12 @@
         <div class="letter-content">
             <h2 style="text-align: center; color: var(--accent-pink); font-family: var(--beastars-font);">Para mi Hinita hermosa...</h2>
             ¡Hola, hinita! <br><br>
-            Desde ese 21 de diciembre, mi vida se pintó de este color tan hermoso que me diste... (aquí va todo tu texto original) <br><br>
+            Desde ese 21 de diciembre, mi vida se pintó de este color tan hermoso... (aquí va tu carta completa) <br><br>
             Te amo mucho mi hinita, espero te guste, cuidate mucho, byeee :3<br><br>
             <strong>De: tu Joshi :3</strong>
         </div>
 
-        <p style="margin: 40px 0; font-size: 0.9rem; font-weight: bold; color: var(--accent-blue);">
+        <p style="margin: 40px 0; font-size: 1rem; font-weight: bold; color: #555;">
             31.12.2025 • 🐺 Por siempre juntos 🐰
         </p>
     </div>
@@ -181,51 +162,41 @@
     <script>
         function createCircles() {
             const container = document.getElementById('circles-container');
-            const count = 50; // Cantidad de círculos
+            const colors = ['#a2d2ff', '#ffafcc']; // Azul y Rosa
+            const count = 40;
 
             for (let i = 0; i < count; i++) {
                 const circle = document.createElement('div');
                 circle.className = 'circle';
                 
-                const size = Math.random() * 70 + 20; 
+                const size = Math.random() * 80 + 30; // Tamaño entre 30 y 110px
                 const left = Math.random() * 100;
-                const duration = Math.random() * 10 + 7;
+                const duration = Math.random() * 8 + 6; // Entre 6 y 14 segundos
                 const delay = Math.random() * 10;
 
                 circle.style.width = `${size}px`;
                 circle.style.height = `${size}px`;
                 circle.style.left = `${left}%`;
                 circle.style.animationDuration = `${duration}s`;
-                circle.style.animationDelay = `-${delay}s`; // Delay negativo para que empiecen ya moviéndose
-
-                // Alternar entre azul y rosado
-                const colorType = Math.random();
-                if (colorType > 0.5) {
-                    circle.style.background = "rgba(178, 216, 255, 0.5)"; // Azul
-                    circle.style.border = "1px solid rgba(255,255,255,0.4)";
-                } else {
-                    circle.style.background = "rgba(255, 194, 209, 0.5)"; // Rosado
-                    circle.style.border = "1px solid rgba(255,255,255,0.4)";
-                }
-
+                circle.style.animationDelay = `-${delay}s`;
+                
+                // Color aleatorio entre la lista de colores
+                circle.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                
                 container.appendChild(circle);
             }
         }
 
-        // Ejecutar creación de círculos
+        // Ejecutar inmediatamente
         createCircles();
 
         function playRandomMusic() {
             const player = document.getElementById('player');
             const status = document.getElementById('music-status');
             const num = Math.floor(Math.random() * 10) + 1;
-            
             player.src = `musica${num}.mp3`;
-            player.play().catch(e => {
-                status.innerText = "¡Sube el volumen y disfruta!";
-            });
-            
-            status.innerText = "Reproduciendo nuestra melodía especial... 💙💖";
+            player.play().catch(e => { status.innerText = "¡Sube el volumen! ✨"; });
+            status.innerText = "Reproduciendo nuestra melodía especial... 🐰💙";
         }
     </script>
 </body>
