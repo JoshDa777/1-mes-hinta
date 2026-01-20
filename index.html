@@ -53,7 +53,7 @@
             position: relative;
             z-index: 10;
             width: 90%;
-            max-width: 750px;
+            max-width: 800px;
             text-align: center;
             padding: 40px 0;
         }
@@ -68,27 +68,34 @@
             text-shadow: 4px 4px 0px var(--blue-circle), -3px -3px 0px var(--pink-circle);
         }
 
+        /* --- Sección de 3 Imágenes --- */
         .couple-images {
             display: flex;
             justify-content: center;
             gap: 15px;
-            margin: 25px 0;
+            margin: 30px 0;
+            flex-wrap: wrap;
         }
 
         .couple-images img {
-            width: 140px;
-            height: 140px;
+            width: 180px;
+            height: 180px;
             border-radius: 20px;
             object-fit: cover;
-            border: 4px solid rgba(255, 255, 255, 0.5);
+            border: 4px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
         }
 
-        /* --- EFECTO DE TRANSPARENCIA Y DIFUMINADO (Glassmorphism) --- */
+        .couple-images img:hover {
+            transform: scale(1.1) rotate(2deg);
+        }
+
+        /* --- EFECTO DE TRANSPARENCIA Y DIFUMINADO --- */
         .music-box, .letter-content {
-            background: rgba(255, 255, 255, 0.15); /* Muy poca opacidad */
-            backdrop-filter: blur(12px); /* Esto hace que los círculos se difuminen al pasar atrás */
-            -webkit-backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.15); /* Opacidad baja como pediste */
+            backdrop-filter: blur(15px); /* Difuminado para que los círculos se vean borrosos al pasar */
+            -webkit-backdrop-filter: blur(15px);
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 30px;
             padding: 30px;
@@ -129,8 +136,9 @@
         <h1 class="beastars-title">HINITA</h1>
         
         <div class="couple-images">
-            <img src="tu-link-a-legoshi.jpg" alt="Legoshi">
-            <img src="tu-link-a-haru.jpg" alt="Haru">
+            <img src="img1.png" alt="Legoshi y Haru 1">
+            <img src="img2.png" alt="Legoshi y Haru 2">
+            <img src="img3.png" alt="Legoshi y Haru 3">
         </div>
 
         <div class="music-box">
@@ -144,7 +152,8 @@
         <div class="letter-content">
             <h2 style="text-align: center; color: #ff0054; font-family: var(--beastars-font);">Para mi Hinita hermosa...</h2>
             ¡Hola, hinita! <br><br>
-            Desde ese 21 de diciembre, mi vida se pintó de este color tan hermoso que me diste... (aquí va tu carta completa) <br><br>
+            Desde ese 21 de diciembre, mi vida se pintó de este color tan hermoso que me diste... <br><br>
+            (Aquí continúa tu mensaje lleno de amor para ella...) <br><br>
             Te amo mucho mi hinita, espero te guste, cuidate mucho, byeee :3<br><br>
             <strong>De: tu Joshi :3</strong>
         </div>
@@ -158,7 +167,7 @@
         function createCircles() {
             const container = document.getElementById('circles-container');
             const colors = ['#a2d2ff', '#ffafcc'];
-            const count = 45;
+            const count = 50;
 
             for (let i = 0; i < count; i++) {
                 const circle = document.createElement('div');
